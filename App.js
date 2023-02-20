@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const https = require("https");
+const fs = require("fs");
 
 const app = express();
 const port = 3001;
@@ -10,7 +12,8 @@ app.use(bodyParser.json());
 
 app.post('/DevOps', (req, res) => {
 
-  const apiKey = req.get('X-API-Key');
+  //const apiKey = req.get('X-API-Key');
+  const apiKey = req.get('X-PARSE-REST-API-Key');
   if (apiKey !== API_KEY) {
     res.status(401).json({ message: 'ERROR: Unauthorized' });
     return;
@@ -33,6 +36,15 @@ app.all('/DevOps', (req, res) => {
   res.status(405).json({ message: 'ERROR: Method Not Allowed' });
 });
 
-app.listen(port, () => {
-  //console.log(`Server listening at http://localhost:${port}`);
+// app.listen(port, () => {
+//   //console.log(`Server listening at http://localhost:${port}`);
+// });
+https
+  .createServer({
+    key: fs.readFileSync("key.pem"),
+    cert: fs.readFileSync("cert.pem"),
+  },app)
+  .listen(port, ()=>{
+    console.log(`server is runing at port: ${port}'`)
 });
+module.exports.app =app
