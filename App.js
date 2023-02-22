@@ -12,14 +12,12 @@ app.use(bodyParser.json());
 
 app.post('/DevOps', (req, res) => {
 
-  //const apiKey = req.get('X-API-Key');
+  
   const apiKey = req.get('X-PARSE-REST-API-Key');
   if (apiKey !== API_KEY) {
     res.status(401).json({ message: 'ERROR: Unauthorized' });
     return;
   }
-
-
   const { message, to, from, timeToLifeSec } = req.body;
 
   console.log(req.body)
@@ -28,7 +26,7 @@ app.post('/DevOps', (req, res) => {
   console.log(`Received POST request with message "${message}", to "${to}", from "${from}", and TTL ${timeToLifeSec} seconds`);
 
 
-  res.json({ message: `Hello "${to}" your message will be send` });
+  res.status(201).json({ message: `Hello "${to}" your message will be send` });
 });
 
 
@@ -36,9 +34,14 @@ app.all('/DevOps', (req, res) => {
   res.status(405).json({ message: 'ERROR: Method Not Allowed' });
 });
 
+
+//================================
+
 // app.listen(port, () => {
-//   //console.log(`Server listening at http://localhost:${port}`);
+//   console.log(`Server listening at http://localhost:${port}`);
 // });
+//==================================
+
 https
   .createServer({
     key: fs.readFileSync("key.pem"),
@@ -47,4 +50,5 @@ https
   .listen(port, ()=>{
     console.log(`server is runing at port: ${port}'`)
 });
+
 module.exports.app =app

@@ -1,0 +1,19 @@
+trigger:
+- main
+stages:
+- stage : build
+  displayName: "Build"
+  jobs:
+  - job: build
+    displayName: "Build"
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '16.x'
+      displayName: 'Install Node js'
+    - script: |
+        npm install
+        npm run build
+      displayName: 'npm install and npm build'
