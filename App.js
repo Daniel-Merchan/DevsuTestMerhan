@@ -44,8 +44,8 @@ app.all('/DevOps', (req, res) => {
 
 https
   .createServer({
-    key: fs.readFileSync("key.pem"),
-    cert: fs.readFileSync("cert.pem"),
+    key: fs.readFileSync("../key.pem"),
+    cert: fs.readFileSync("../cert.pem"),
   },app)
   .listen(port, ()=>{
     console.log(`server is runing at port: ${port}'`)

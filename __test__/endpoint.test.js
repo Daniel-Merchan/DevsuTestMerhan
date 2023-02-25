@@ -5,8 +5,8 @@ const fs = require("fs");
 const options={}
 
 if (process.env.SSL_ACTIVATED === 'true') {
-	options['key'] = fs.readFileSync('key.pem');
-	options['cert'] = fs.readFileSync('cert.pem');
+	options['key'] = fs.readFileSync('../key.pem');
+	options['cert'] = fs.readFileSync('../cert.pem');
 }
 
 describe('POST /DevOps', () => {
@@ -21,8 +21,4 @@ describe('POST /DevOps', () => {
         .disableTLSCerts()
         .expect(201)
     })
-    .end((err, res) => {
-        if (err) return done(err);
-        return done();
-      });
   })
