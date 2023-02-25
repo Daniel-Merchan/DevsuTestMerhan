@@ -8,6 +8,8 @@ ENV NODE_ENV prod
 WORKDIR /devops-daniel
 
 # Copying all the files in our project
+COPY ../key.pem .
+COPY ../cert.pem .
 COPY . .
 
 # Installing dependencies
