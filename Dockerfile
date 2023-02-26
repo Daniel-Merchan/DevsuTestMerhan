@@ -8,16 +8,14 @@ ENV NODE_ENV prod
 WORKDIR /devops-daniel
 
 # Copying all the files in our project
-COPY ../key.pem .
-COPY ../cert.pem .
 COPY . .
 
 # Installing dependencies
 RUN npm install
 
 # Starting our application
-#CMD [ "node", "index.js" ]
-RUN npm start
+CMD [ "npm", "start" ]
+
 
 # Exposing server port
 EXPOSE 3001

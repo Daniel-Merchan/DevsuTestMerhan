@@ -37,18 +37,18 @@ app.all('/DevOps', (req, res) => {
 
 //================================
 
-// app.listen(port, () => {
+ app.listen(port, () => {
 //   console.log(`Server listening at http://localhost:${port}`);
-// });
+ });
 //==================================
 
-https
-  .createServer({
-    key: fs.readFileSync("../key.pem"),
-    cert: fs.readFileSync("../cert.pem"),
-  },app)
-  .listen(port, ()=>{
-    console.log(`server is runing at port: ${port}'`)
-});
+// https
+//   .createServer({
+//     key: fs.readFileSync("../key.pem"),
+//     cert: fs.readFileSync("../cert.pem"),
+//   },app)
+//   .listen(port, ()=>{
+//     console.log(`server is runing at port: ${port}'`)
+// });
 
 module.exports.app =app
