@@ -1,8 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const https = require("https");
-const fs = require("fs");
-
 const app = express();
 const port = 3001;
 const API_KEY = '2f5ae96c-b558-4c7b-a590-a501ae1c3f6c';
@@ -38,17 +35,8 @@ app.all('/DevOps', (req, res) => {
 //================================
 
  app.listen(port, () => {
-//   console.log(`Server listening at http://localhost:${port}`);
+
  });
 //==================================
-
-// https
-//   .createServer({
-//     key: fs.readFileSync("../key.pem"),
-//     cert: fs.readFileSync("../cert.pem"),
-//   },app)
-//   .listen(port, ()=>{
-//     console.log(`server is runing at port: ${port}'`)
-// });
 
 module.exports.app =app
