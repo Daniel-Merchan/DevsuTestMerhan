@@ -1,5 +1,5 @@
 trigger:
-- main
+- test
 stages:
 - stage : build
   displayName: "Build"
@@ -16,3 +16,16 @@ stages:
     - script: |
         npm install
       displayName: 'npm install'
+- stage: TDD
+  dependsOn: build
+  displayName: "Test TDD"
+  jobs:
+  - job: test
+    displayName: "Test TDD"
+    steps:
+    - script: |
+        npm test  
+      displayName: 'npm test'
+
+
+   
