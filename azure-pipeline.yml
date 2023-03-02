@@ -23,9 +23,11 @@ stages:
   - job: test
     displayName: "Test TDD"
     steps:
-    - script: |
-        npm test  
-      displayName: 'npm test'
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        customCommand: "npm test"
+
 
 
    
