@@ -15,19 +15,18 @@ stages:
       displayName: 'Install Node js'
     - script: |
         npm install
-        npm test
-      displayName: 'npm install and test'
-# - stage: TDD
-#   dependsOn: build
-#   displayName: "Test TDD"
-#   jobs:
-#   - job: test
-#     displayName: "Test TDD"
-#     steps:
-#     - task: Npm@1
-#       inputs:
-#         command: 'custom'
-#         customCommand: "test"
+      displayName: 'npm install'
+- stage: TDD
+  dependsOn: build
+  displayName: "Test TDD"
+  jobs:
+  - job: test
+    displayName: "Test TDD"
+    steps:
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        customCommand: "test"
 
 
 
