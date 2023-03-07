@@ -22,13 +22,17 @@ stages:
   jobs:
   - job: test
     displayName: "Test TDD"
+    # steps:
+    # - task: Npm@1
+    #   inputs:
+    #     command: 'custom'
+    #     verbose: true
+    #     workingDir: '/DevsuTestMerhan'
+    #     customCommand: "test"
     steps:
-    - task: Npm@1
-      inputs:
-        command: 'custom'
-        workingDir: '/DevsuTestMerhan'
-        customCommand: "test"
-
+    - script: |
+        npm test
+      displayName: 'npm test'
 
 
    
