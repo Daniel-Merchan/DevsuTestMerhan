@@ -5,7 +5,7 @@ FROM node:slim
 ENV NODE_ENV prod
 
 # Setting up the work directory
-WORKDIR /DevTest
+WORKDIR /DevsuTestMerhan
 
 # Copying all the files in our project
 COPY . .
