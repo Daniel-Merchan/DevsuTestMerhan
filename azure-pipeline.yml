@@ -1,5 +1,5 @@
 trigger:
-- test
+- main
 stages:
 - stage : build
   displayName: "Build"
