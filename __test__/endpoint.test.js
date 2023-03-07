@@ -1,13 +1,13 @@
 const request = require('supertest')
-
 const { app } = require('../App.js')
 const fs = require("fs");
 const options={}
 
 
 
+
 describe('POST /DevOps', () => {
-    test('should return the message', async () => {
+    test('json message returned', async () => {
       await request(app)
         .post('/DevOps')
         .set('Accept', 'application/json')
@@ -17,3 +17,4 @@ describe('POST /DevOps', () => {
         .expect(201)
     })
   })
+ 
