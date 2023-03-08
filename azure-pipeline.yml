@@ -5,7 +5,7 @@ stages:
   displayName: "Build and test"
   jobs:
   - job: build
-    displayName: "Build"
+    displayName: "Build and test"
     pool:
       vmImage: 'ubuntu-latest'
     steps:
@@ -21,7 +21,7 @@ stages:
       displayName: 'npm test'
 #.................Second stage dockerizing app.........
 # - stage: TDD
-#   dependsOn: build
+#   dependsOn: buildandtest
 #   displayName: "Test TDD"
 #   jobs:
 #   - job: test

@@ -36,9 +36,7 @@ app.all('/DevOps', (req, res) => {
 
 //================================
 
- app.listen(port, () => {
-
- });
+ var server= app.listen(port, () => {});
 //==================================
-
-module.exports.app =app
+//server.close()
+module.exports.server =server
