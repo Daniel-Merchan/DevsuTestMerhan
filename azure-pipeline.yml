@@ -1,8 +1,8 @@
 trigger:
 - test
 stages:
-- stage : build
-  displayName: "Build"
+- stage : buildandtest
+  displayName: "Build and test"
   jobs:
   - job: build
     displayName: "Build"
@@ -16,23 +16,20 @@ stages:
     - script: |
         npm install
       displayName: 'npm install'
-- stage: TDD
-  dependsOn: build
-  displayName: "Test TDD"
-  jobs:
-  - job: test
-    displayName: "Test TDD"
-    # steps:
-    # - task: Npm@1
-    #   inputs:
-    #     command: 'custom'
-    #     verbose: true
-    # 
-    #     customCommand: "test"
-    steps:
     - script: |
         npm test
       displayName: 'npm test'
+#.................Second stage dockerizing app.........
+# - stage: TDD
+#   dependsOn: build
+#   displayName: "Test TDD"
+#   jobs:
+#   - job: test
+#     displayName: "Test TDD"
+#     steps:
+#     - script: |
+#         npm test
+#       displayName: 'npm test'
 
 
    
