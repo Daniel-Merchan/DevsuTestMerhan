@@ -4,7 +4,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 variables: 
-  ImageName: 'danielmerchan1910/simpleapp:latest'
+  ImageName: 'danielmerchan1910/simpleapp:$(Build.BuildId)'
 
 stages:
 - stage : buildandtest
