@@ -36,6 +36,13 @@ stages:
         command: login
         containerRegistry: DockerHubConnection
         displayName: 'Login in docker hub'
+    - task: Docker@2
+      displayName: Build and Push
+      inputs:
+        command: buildAndPush
+        Dockerfile: './Dockerfile'
+        repository: '$(ImagName)'
+        #repository: username/repository
 
  #DockerHubConnection     
 
