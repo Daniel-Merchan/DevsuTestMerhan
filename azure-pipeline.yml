@@ -1,14 +1,17 @@
 #azure ipelin to deploy my devsu app
 trigger:
 - test
+pool:
+  vmImage: 'ubuntu-latest'
+variables: 
+  ImageName: 'danielmerchan1910/simpleapp:latest'
+
 stages:
 - stage : buildandtest
   displayName: "Build and test"
   jobs:
   - job: build
     displayName: "Build and test"
-    pool:
-      vmImage: 'ubuntu-latest'
     steps:
     - task: NodeTool@0
       inputs:
@@ -21,6 +24,24 @@ stages:
         npm test
       displayName: 'npm test'
 #.................Second stage dockerizing app.........
+- stage: Build and Push Docker vmImage
+  displayName: "Build and push docker"
+  jobs:
+  - job: BuildandPush
+    displayName: Build and push Docker image
+    steps:
+    - task: Docker@2
+      displayName: Login to Docker Hub
+      inputs:
+        command: login
+        containerRegistry: DockerHubConnection
+        displayName: 'Login in docker hub'
+
+ #DockerHubConnection     
+
+
+
+
 # - stage: TDD
 #   dependsOn: buildandtest
 #   displayName: "Test TDD"
