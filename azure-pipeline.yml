@@ -41,7 +41,7 @@ stages:
       inputs:
         command: buildAndPush
         Dockerfile: './Dockerfile'
-        repository: '$(ImagName)'
+        repository: '$(ImageName)'
         #repository: username/repository
 
  #DockerHubConnection     
