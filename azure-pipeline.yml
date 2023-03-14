@@ -24,7 +24,7 @@ stages:
         npm test
       displayName: 'npm test'
 #.................Second stage dockerizing app.........
-- stage: Build and Push Docker vmImage
+- stage: buildandpush
   displayName: "Build and push docker"
   jobs:
   - job: BuildandPush
