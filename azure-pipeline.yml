@@ -48,7 +48,7 @@ stages:
 #..............third stage deploy to k8s cluster
 - stage: Deploy
   displayName: "Deploy in aks"
-  dependsOn: buildandpush
+ # dependsOn: buildandpush
   jobs:
   - job: deploy
     displayName: Deploy in aks
