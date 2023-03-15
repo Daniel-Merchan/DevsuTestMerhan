@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: danielapp
+  labels:
+    app: danielapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: danielapp
+  template:
+    metadata:
+      labels:
+        app: danielapp
+    spec:
+      containers:
+      - name: danielapp
+        image: danielmerchan1910/testappp:latest
+        ports:
+        - containerPort: 3001
