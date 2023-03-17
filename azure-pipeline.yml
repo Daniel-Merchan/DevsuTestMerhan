@@ -67,8 +67,8 @@ stages:
         #-------------------------
         #-------------------------
         #name of image from docker
-        #containers: |
-        #  foo/demo:$(tagVariable1)
+        containers: |
+          danielmerchan1910/simpleapp:52
         #  bar/demo:$(tagVariable2)
         # imagePullSecrets: |
         #   some-secret
