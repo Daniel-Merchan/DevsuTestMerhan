@@ -61,9 +61,9 @@ stages:
         namespace: default
         #name of my manifests
         manifests: |
-          ./deployment.yml  
-          ./ingress.yml
-          ./lbservice.yml
+          ./manifests/deployment.yaml  
+          ./manifests/ingress.yaml
+          ./manifests/lbservice.yaml
         #-------------------------
         #-------------------------
         #name of image from docker
