@@ -4,7 +4,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 variables: 
-  ImageName: 'danielmerchan1910/simpleapp:52'
+  ImageName: '{{danielmerchan1910/simpleapp:52}}'
  # containerRegistry: DockerHubConnection
 
 

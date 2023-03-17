@@ -17,6 +17,6 @@ spec:
       containers:
       - name: danielapp
         #image: danielmerchan1910/testappp:latest
-        image: $ImageName
+        image: $(ImageName)
         ports:
         - containerPort: 3001
