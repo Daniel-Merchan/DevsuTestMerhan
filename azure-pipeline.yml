@@ -5,7 +5,7 @@ pool:
   vmImage: 'ubuntu-latest'
 variables: 
   ImageName: 'danielmerchan1910/simpleapp'
-  tag: 'latest'
+  tag: '$(Build.BuildId)'
  # containerRegistry: DockerHubConnection
 
 
