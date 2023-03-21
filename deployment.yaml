@@ -17,6 +17,6 @@ spec:
       containers:
       - name: danielapp
         #image: danielmerchan1910/testappp:latest
-        image: '$(ImageName):$(Build.BuildId)'
+        image: '$(ImageName)':'$(Build.BuildId)'
         ports:
         - containerPort: 3001
