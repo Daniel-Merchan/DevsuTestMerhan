@@ -6,7 +6,7 @@ pool:
 variables: 
   ImageName: 'danielmerchan1910/simpleapp'
   tag: '$(Build.BuildId)'
- # containerRegistry: DockerHubConnection
+  containerRegistry: DockerHubConnection
 
 
 stages:
@@ -37,7 +37,7 @@ stages:
       displayName: Login to Docker Hub
       inputs:
         command: login
-        containerRegistry: DockerHubConnection
+        containerRegistry: '$(containerRegistry)'
         displayName: 'Login in docker hub'
     - task: Docker@2
       displayName: Build and Push
