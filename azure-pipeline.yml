@@ -1,4 +1,4 @@
-#azure ipelin to deploy my devsu app
+#azure pipeline to deploy my devsu app dev env
 trigger:
 - test
 pool:
@@ -72,10 +72,7 @@ stages:
         #name of image from docker
         containers: |
           $(ImageName):$(tag)
-        #  bar/demo:$(tagVariable2)
-        # imagePullSecrets: |
-        #   some-secret
-        #   some-other-secret
+      
    
 
 
