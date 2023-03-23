@@ -1,6 +1,6 @@
 #azure pipeline to deploy my devsu app dev env
 trigger:
-- test
+- main
 pool:
   vmImage: 'ubuntu-latest'
 variables: 
