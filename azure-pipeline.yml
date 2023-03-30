@@ -65,6 +65,9 @@ stages:
       runOnce:
         deploy: 
           steps:
+          - task: CmdLine@2
+            inputs:
+              script: pwd
           - task: KubernetesManifest@0
             displayName: Deploytask
             inputs:
