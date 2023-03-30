@@ -15,6 +15,8 @@ variables:
     cluster: myk8scluster
     ImageName: 'danielmerchan1910/simpleapp'
     containerRegistry: DockerHubConnection
+  
+
 
 stages:
 - stage : buildandtest
@@ -52,6 +54,8 @@ stages:
         command: buildAndPush
         Dockerfile: './Dockerfile'
         repository: '$(ImageName)'
+        #'--- we can use tag as latest
+        #'${{ variables.tag }}'
         tags: |
          $(tag)
 #..............third stage deploy to k8s cluster
@@ -72,6 +76,7 @@ stages:
           ./manifests/deployment.yaml  
           ./manifests/ingress.yaml
           ./manifests/lbservice.yaml
+        #name of image from docker
         containers: |
           $(ImageName):$(tag)
       
