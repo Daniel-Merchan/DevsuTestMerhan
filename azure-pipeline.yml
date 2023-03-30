@@ -58,29 +58,29 @@ stages:
   displayName: "Deploy in aks"
   dependsOn: buildandpush
   jobs:
-    - deployment: prodDeploy
-      displayName: Deploy in aks
-      environment: $(env)   #configured an approval in this enviroment
-      strategy:
-        runOnce:
-          deploy: 
-            steps:
-            - task: KubernetesManifest@0
-              displayName: Deploytask
-              inputs:
-                action: deploy
-                kubernetesServiceConnection: $(cluster)
-                namespace: default
-                manifests: |
-                  ./manifests/deployment.yaml  
-                  ./manifests/ingress.yaml
-                  ./manifests/lbservice.yaml
-                containers: |
-                  $(ImageName):$(tag)
+  - deployment: prodDeploy
+    displayName: Deploy in aks
+    environment: $(env)   #configured an approval in this enviroment
+    strategy:
+      runOnce:
+        deploy: 
+          steps:
+          - task: KubernetesManifest@0
+            displayName: Deploytask
+            inputs:
+              action: deploy
+              kubernetesServiceConnection: $(cluster)
+              namespace: default
+              manifests: |
+                $(System.ArtifactsDirectory)/manifests/*
+              containers: |
+                $(ImageName):$(tag)
                 
               
               
-
+    # ./manifests/deployment.yaml  
+                # ./manifests/ingress.yaml
+                # ./manifests/lbservice.yaml
 
 
 
