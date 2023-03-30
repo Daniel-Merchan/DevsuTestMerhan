@@ -7,17 +7,14 @@ pool:
 variables: 
   ${{ if eq(variables['Build.SourceBranchName'],'main') }}:
     tag: 'main$(Build.BuildId)'
-    cluster: myk8scluster
+    cluster: myk8scluster   #service connection for main cluster
     ImageName: 'danielmerchan1910/simpleapp'
     containerRegistry: DockerHubConnection
   ${{ if eq(variables['Build.SourceBranchName'],'test') }}:
     tag: 'test$(Build.BuildId)'
-    cluster: myk8scluster
+    cluster: myk8scluster   #service connection for test cluster
     ImageName: 'danielmerchan1910/simpleapp'
     containerRegistry: DockerHubConnection
-  
-
-
 stages:
 - stage : buildandtest
   displayName: "Build and test"
@@ -55,7 +52,6 @@ stages:
         Dockerfile: './Dockerfile'
         repository: '$(ImageName)'
         #'--- we can use tag as latest
-        #'${{ variables.tag }}'
         tags: |
          $(tag)
 #..............third stage deploy to k8s cluster
@@ -76,7 +72,6 @@ stages:
           ./manifests/deployment.yaml  
           ./manifests/ingress.yaml
           ./manifests/lbservice.yaml
-        #name of image from docker
         containers: |
           $(ImageName):$(tag)
       
