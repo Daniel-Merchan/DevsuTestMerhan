@@ -78,37 +78,7 @@ stages:
                 ./manifests/lbservice.yaml
               containers: |
                 $(ImageName):$(tag)
-                
-              
-              
-    # ./manifests/deployment.yaml  
-                # ./manifests/ingress.yaml
-                # ./manifests/lbservice.yaml
 
-
-
-
-
-
-
-    # - environment: $(env)
-    # - job: deploy
-    #   #environment: $(env)
-    #   displayName: Deploy in aks
-    #   steps:
-    #   - task: KubernetesManifest@0
-    #     displayName: Deploy
-    #     inputs:
-    #       action: deploy
-    #       kubernetesServiceConnection: $(cluster)
-    #       namespace: default
-    #       manifests: |
-    #         ./manifests/deployment.yaml  
-    #         ./manifests/ingress.yaml
-    #         ./manifests/lbservice.yaml
-    #       containers: |
-    #         $(ImageName):$(tag)
-      
    
 
 
