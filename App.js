@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 3001;
 const API_KEY = '2f5ae96c-b558-4c7b-a590-a501ae1c3f6c';
-
+const X_JWT_KWY= null ;
 
 app.use(bodyParser.json());
 
