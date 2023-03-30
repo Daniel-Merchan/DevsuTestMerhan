@@ -63,11 +63,9 @@ stages:
     environment: $(env)   #configured an approval in this enviroment
     strategy:
       runOnce:
-        preDeploy:
-          steps:
-          - script: checkout
         deploy: 
           steps:
+          - checkout: self
           - task: KubernetesManifest@0
             displayName: Deploytask
             inputs:
