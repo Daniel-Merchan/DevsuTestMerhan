@@ -1,4 +1,4 @@
-#azure pipeline to deploy my devsu app dev env
+#azure pipeline to deploy my devsu app
 trigger:
 - test
 - main
@@ -51,7 +51,6 @@ stages:
         command: buildAndPush
         Dockerfile: './Dockerfile'
         repository: '$(ImageName)'
-        #'--- we can use tag as latest
         tags: |
          $(tag)
 #..............third stage deploy to k8s cluster
@@ -69,15 +68,15 @@ stages:
             - task: KubernetesManifest@0
               displayName: Deploytask
               inputs:
-                  action: deploy
-                  kubernetesServiceConnection: $(cluster)
-                  namespace: default
-                  manifests: |
-                    ./manifests/deployment.yaml  
-                    ./manifests/ingress.yaml
-                    ./manifests/lbservice.yaml
-                  containers: |
-                    $(ImageName):$(tag)
+                action: deploy
+                kubernetesServiceConnection: $(cluster)
+                namespace: default
+                manifests: |
+                  ./manifests/deployment.yaml  
+                  ./manifests/ingress.yaml
+                  ./manifests/lbservice.yaml
+                containers: |
+                  $(ImageName):$(tag)
                 
               
               
