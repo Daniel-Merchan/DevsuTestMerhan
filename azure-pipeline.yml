@@ -65,9 +65,6 @@ stages:
       runOnce:
         deploy: 
           steps:
-          - task: CmdLine@2
-            inputs:
-              script: pwd
           - task: KubernetesManifest@0
             displayName: Deploytask
             inputs:
@@ -75,7 +72,7 @@ stages:
               kubernetesServiceConnection: $(cluster)
               namespace: default
               manifests: |
-                $(System.ArtifactsDirectory)/manifests/*
+                $(Pipeline.Workspace)/s/manifests/*
               containers: |
                 $(ImageName):$(tag)
                 
