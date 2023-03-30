@@ -69,15 +69,15 @@ stages:
               - task: KubernetesManifest@0
                 displayName: Deploytask
                 inputs:
-                action: deploy
-                kubernetesServiceConnection: $(cluster)
-                namespace: default
-                manifests: |
-                  ./manifests/deployment.yaml  
-                  ./manifests/ingress.yaml
-                  ./manifests/lbservice.yaml
-                containers: |
-                  $(ImageName):$(tag)
+                  action: deploy
+                  kubernetesServiceConnection: $(cluster)
+                  namespace: default
+                  manifests: |
+                    ./manifests/deployment.yaml  
+                    ./manifests/ingress.yaml
+                    ./manifests/lbservice.yaml
+                  containers: |
+                    $(ImageName):$(tag)
 
 
 
