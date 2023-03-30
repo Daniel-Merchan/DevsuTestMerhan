@@ -1,4 +1,4 @@
-#azure pipeline to deploy my devsu app dev env
+#azure pipeline to deploy my devsu app
 trigger:
 - test
 - main
@@ -7,17 +7,14 @@ pool:
 variables: 
   ${{ if eq(variables['Build.SourceBranchName'],'main') }}:
     tag: 'main$(Build.BuildId)'
-    cluster: myk8scluster
-    ImageName: 'danielmerchan1910/simpleapp'
-    containerRegistry: DockerHubConnection
+    env: Production
+    cluster: myk8scluster   #service connection for main cluster
   ${{ if eq(variables['Build.SourceBranchName'],'test') }}:
     tag: 'test$(Build.BuildId)'
-    cluster: myk8scluster
-    ImageName: 'danielmerchan1910/simpleapp'
-    containerRegistry: DockerHubConnection
-  
-
-
+    env: Test
+    cluster: myk8scluster   #service connection for test cluster
+  ImageName: 'danielmerchan1910/simpleapp'
+  containerRegistry: DockerHubConnection
 stages:
 - stage : buildandtest
   displayName: "Build and test"
@@ -46,8 +43,6 @@ stages:
       displayName: Login to Docker Hub
       inputs:
         command: login
-        #containerRegistry: 'variables['containerRegistry']'
-        #containerRegistry: '${{variables.containerRegistry}}'
         containerRegistry: '$(containerRegistry)'
         displayName: 'Login in docker hub'
     - task: Docker@2
@@ -56,8 +51,6 @@ stages:
         command: buildAndPush
         Dockerfile: './Dockerfile'
         repository: '$(ImageName)'
-        #'--- we can use tag as latest
-        #'${{ variables.tag }}'
         tags: |
          $(tag)
 #..............third stage deploy to k8s cluster
@@ -65,22 +58,56 @@ stages:
   displayName: "Deploy in aks"
   dependsOn: buildandpush
   jobs:
-  - job: deploy
+  - deployment: prodDeploy
     displayName: Deploy in aks
-    steps:
-    - task: KubernetesManifest@0
-      displayName: Deploy
-      inputs:
-        action: deploy
-        kubernetesServiceConnection: $(cluster)
-        namespace: default
-        manifests: |
-          ./manifests/deployment.yaml  
-          ./manifests/ingress.yaml
-          ./manifests/lbservice.yaml
-        #name of image from docker
-        containers: |
-          $(ImageName):$(tag)
+    environment: $(env)   #configured an approval in this enviroment
+    strategy:
+      runOnce:
+        deploy: 
+          steps:
+          - checkout: self
+          - task: KubernetesManifest@0
+            displayName: Deploytask
+            inputs:
+              action: deploy
+              kubernetesServiceConnection: $(cluster)
+              namespace: default
+              manifests: |
+                ./manifests/deployment.yaml
+                ./manifests/ingress.yaml
+                ./manifests/lbservice.yaml
+              containers: |
+                $(ImageName):$(tag)
+                
+              
+              
+    # ./manifests/deployment.yaml  
+                # ./manifests/ingress.yaml
+                # ./manifests/lbservice.yaml
+
+
+
+
+
+
+
+    # - environment: $(env)
+    # - job: deploy
+    #   #environment: $(env)
+    #   displayName: Deploy in aks
+    #   steps:
+    #   - task: KubernetesManifest@0
+    #     displayName: Deploy
+    #     inputs:
+    #       action: deploy
+    #       kubernetesServiceConnection: $(cluster)
+    #       namespace: default
+    #       manifests: |
+    #         ./manifests/deployment.yaml  
+    #         ./manifests/ingress.yaml
+    #         ./manifests/lbservice.yaml
+    #       containers: |
+    #         $(ImageName):$(tag)
       
    
 
