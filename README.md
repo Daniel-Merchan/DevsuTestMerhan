@@ -13,10 +13,10 @@ JSON RESPONSE EXAMPLE :
 { “message” : “Hello Juan Perez your message will be send” }
 ## ** TESTING THE CONTAINERIZED APP**
 To test the functionality of the application you should use the command:  
-curl -X POST "\"
--H "X-Parse-REST-API-Key: 2f5ae96c-b558-4c7b-a590-a501ae1c3f6c" "\"
--H "Content-Type: application/json" \
--d '{ "message" : "This is a test", "to": "Daniel Felipe Merchan PiEdra", "from": "Rita Asturia", "timeToLifeSec" : 45 }' \
+curl -X POST \* \ \*
+-H "X-Parse-REST-API-Key: 2f5ae96c-b558-4c7b-a590-a501ae1c3f6c" \* \ \*
+-H "Content-Type: application/json" \* \ \*
+-d '{ "message" : "This is a test", "to": "Daniel Felipe Merchan PiEdra", "from": "Rita Asturia", "timeToLifeSec" : 45 }' \* \ \*
 https://danieltest-hjcectbpcsffc3dc.z01.azurefd.net/DevOps
 ## **CONTENTS**
 At this point we will explain the most important components of the project, wich are the main requirements of the tech test:  
